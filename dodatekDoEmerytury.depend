@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1492015655 source:c:\users\grzesiek\desktop\c++\wyzwania z kursu\dodatekdoemerytury\main.cpp
+	<iostream>
+	<iomanip>
+	<math.h>
+	<conio.h>
+	<cstdlib>
+	<windows.h>
+
+1492015655 source:f:\kurs_przysz£y programista\wyzwania _przysz£y programista\dodatekdoemerytury_grzesiek\main.cpp
+	<iostream>
+	<iomanip>
+	<math.h>
+	<conio.h>
+	<cstdlib>
+	<windows.h>
+

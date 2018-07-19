@@ -1,0 +1,77 @@
+#include <iostream>
+#include <iomanip>
+#include <math.h>
+#include <conio.h>
+#include <cstdlib>
+#include <windows.h>
+
+using namespace std;
+
+
+int main() {
+    char znak;
+    do {
+        float pozadanaMiesiecznaEmerytura;
+        float oprocentowanieLokaty;
+        float podatek = 0.19;
+
+        int wiekObecny;
+        int wiekPrzejsciaNaemeryture;
+
+
+        cout << "Ile masz obecnie lat: ";
+        cin>>wiekObecny;
+
+        cout << "W jakim wieku chcesz przejsc na emeryture: ";
+        cin>>wiekPrzejsciaNaemeryture;
+
+        cout << "W jakiej wysokosci chcialbys miec dodatek do emerytury: ";
+        cin>>pozadanaMiesiecznaEmerytura;
+
+        cout << "Podaj oprocentowanie lokaty (w procentach): ";
+        cin>>oprocentowanieLokaty;
+
+        int lataPracy = wiekPrzejsciaNaemeryture - wiekObecny;
+        oprocentowanieLokaty = oprocentowanieLokaty / 100;
+        int liczbaLat = 1;
+        int liczbaOkresowKapitalizacjiWCiaguRoku = 12;
+
+        float odsetkiWSkaliRoku = 12 * pozadanaMiesiecznaEmerytura;
+        float licznikPierwszyWzor = odsetkiWSkaliRoku;
+        float liczbaPotegowanaPierwszyWzor = (oprocentowanieLokaty * (1-podatek) / liczbaOkresowKapitalizacjiWCiaguRoku) + 1;
+        float mianownikPierwszyWzor = pow(liczbaPotegowanaPierwszyWzor, liczbaLat * liczbaOkresowKapitalizacjiWCiaguRoku) - 1;
+        float uzbieranaKwota = licznikPierwszyWzor / mianownikPierwszyWzor;
+
+
+
+        float licznik = uzbieranaKwota * (oprocentowanieLokaty / 12) * (1-podatek);
+        float liczbaPotegowana = (1 + (oprocentowanieLokaty / 12) * (1 - podatek));
+        float mianownik = (1+ (oprocentowanieLokaty / 12) * (1-podatek)) * (pow (liczbaPotegowana, lataPracy * 12 )) - 1;
+
+        float miesiecznaSkladka = licznik / mianownik;
+
+
+        cout << endl << "Aby po " << lataPracy << " latach pracy odkladana na lokate oprocentowana na " << (oprocentowanieLokaty*100) << " procent " <<endl;
+        cout << "miec dodatek do emerutury miesieczny w wysokosci " << pozadanaMiesiecznaEmerytura << " zl wyplaconych wylacznie z odsetek " <<endl;
+        cout << fixed << setprecision(2);
+        cout << "nalezy miesiecznie odkladac " << miesiecznaSkladka << " zl" << endl;
+        cout << "to pozwoli Ci uzbierac kwote w wyskosci: " << uzbieranaKwota << " zl" <<endl;
+
+        cout << endl<<"Czy chcesz wykonac obliczenia dla innych danych <t/n >?: ";
+        cin>>znak;
+
+        while ( znak !='t' && znak != 'n') {
+            cout<< endl <<"Niepoprawny klawisz! Wcisnij klawisz t lub n "<<endl;
+            cin>>znak;
+        }
+
+    } while(znak=='t');
+
+    if (znak == 'n') {
+        cout << endl << "Wybrales opcje zamykajaca program. Do widzenia !!";
+        Sleep(1500);
+        exit(0);
+    }
+
+    return 0;
+}
